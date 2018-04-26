@@ -7,6 +7,10 @@ const posts = require('./routes/api/posts');
 
 const app = express();
 
+//  body-parser incl. in express 4.16 middleware
+app.use(express.urlencoded({ extended: false }));
+app.use(express.json());
+
 // config db
 const db = require('./config/keys').mongoURI;
 
