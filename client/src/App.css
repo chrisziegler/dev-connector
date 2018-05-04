@@ -1,3 +1,12 @@
+body {
+  margin: 0;
+  padding: 0;
+}
+
+* {
+  box-sizing: border-box;
+}
+
 img {
   width: 100%;
 }
@@ -7,7 +16,8 @@ img {
   background: url('./img/showcase.jpg') no-repeat;
   background-size: cover;
   background-position: center;
-  height: 100vh;
+  min-height: calc(100vh - 125px);
+  /* compensate for enforced ! margins in bootstrap navbar and footer */
   margin-top: -24px;
   margin-bottom: -50px;
 }
@@ -36,4 +46,18 @@ img {
 
 .form-control::placeholder {
   color: #bbb !important;
+}
+
+.register {
+  min-height: calc(100vh - 125px);
+  /* compensate for enforced ! margins in bootstrap navbar and footer */
+  margin-top: -24px;
+  margin-bottom: -50px;
+}
+
+.login {
+  min-height: calc(100vh - 125px);
+  /* compensate for enforced ! margins in bootstrap navbar and footer */
+  margin-top: -24px;
+  margin-bottom: -50px;
 }
