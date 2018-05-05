@@ -16,9 +16,7 @@ const User = require('../../models/User');
 // @route   GET api/users/test
 // @desc    Tests users route
 // @access  Public
-router.get('/test', (req, res) =>
-  res.json({ msg: 'Users Works' })
-);
+router.get('/test', (req, res) => res.json({ msg: 'Users Works' }));
 
 // @route   POST api/users/register
 // @desc    Register user
@@ -102,8 +100,7 @@ router.post('/login', (req, res) => {
           }
         );
       } else {
-        errors.password =
-          'Password/email combination is incorrect';
+        errors.password = 'Password/email combination is incorrect';
         return res.status(400).json(errors);
       }
     });
@@ -113,16 +110,12 @@ router.post('/login', (req, res) => {
 // @route   GET api/users/current
 // @desc    Return current uzer
 // @access  Private
-router.get(
-  '/current',
-  passport.authenticate('jwt', { session: false }),
-  (req, res) => {
-    res.json({
-      id: req.user.id,
-      name: req.user.name,
-      email: req.user.email
-    });
-  }
-);
+router.get('/current', passport.authenticate('jwt', { session: false }), (req, res) => {
+  res.json({
+    id: req.user.id,
+    name: req.user.name,
+    email: req.user.email
+  });
+});
 
 module.exports = router;
