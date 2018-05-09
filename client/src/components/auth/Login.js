@@ -11,10 +11,16 @@ class Login extends Component {
     errors: {}
   };
 
-  // if reducer generated errors are on props from mapStateToProps
-  // add them tyo local state to use in our JSX
-  // So errors go from being application state, to props, to local component state
+  componentDidMount() {
+    if (this.props.auth.isAuthenticated) {
+      this.props.history.push('/dashboard');
+    }
+  }
+
   componentWillReceiveProps(nextProps) {
+    if (nextProps.auth.isAuthenticated) {
+      this.props.history.push('/dashboard');
+    }
     if (nextProps.errors) {
       this.setState({ errors: nextProps.errors });
     }
@@ -27,8 +33,8 @@ class Login extends Component {
   onSubmit = e => {
     e.preventDefault();
     const { email, password } = this.state;
-    const user = { email, password };
-    console.log(user);
+    const userData = { email, password };
+    this.props.loginUser(userData);
   };
 
   render() {
@@ -58,6 +64,11 @@ class Login extends Component {
                     value={this.state.email}
                     onChange={this.onChange}
                   />
+                  {errors.email && (
+                    <div className="invalid-feedback">
+                      {errors.email}
+                    </div>
+                  )}
                 </div>
                 <div className="form-group">
                   <input
@@ -73,6 +84,11 @@ class Login extends Component {
                     value={this.state.password}
                     onChange={this.onChange}
                   />
+                  {errors.password && (
+                    <div className="invalid-feedback">
+                      {errors.password}
+                    </div>
+                  )}
                 </div>
                 <input
                   type="submit"
