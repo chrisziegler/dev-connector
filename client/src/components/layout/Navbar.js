@@ -5,11 +5,6 @@ import { connect } from 'react-redux';
 import { logoutUser } from '../../actions/authActions';
 
 class Navbar extends Component {
-  // onLogoutClick(e) {
-  //   e.preventDefault();
-  //   this.props.logoutUser();
-  // }
-
   onLogoutClick = e => {
     e.preventDefault();
     this.props.logoutUser();
@@ -23,7 +18,7 @@ class Navbar extends Component {
         <li className="nav-item">
           <a
             href=""
-            onClick={event => this.onLogoutClick(event)}
+            onClick={this.onLogoutClick}
             className="nav-link"
           >
             <img
