@@ -11,6 +11,7 @@ class Login extends Component {
     errors: {}
   };
 
+  // If user is logged-in do not load login form in Landing/Dashboard spot
   componentDidMount() {
     if (this.props.auth.isAuthenticated) {
       this.props.history.push('/dashboard');
@@ -21,6 +22,7 @@ class Login extends Component {
     if (nextProps.auth.isAuthenticated) {
       this.props.history.push('/dashboard');
     }
+    // isAuthenticated wouldnt be true if errors
     if (nextProps.errors) {
       this.setState({ errors: nextProps.errors });
     }

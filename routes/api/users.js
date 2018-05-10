@@ -35,7 +35,7 @@ router.post('/register', (req, res) => {
     } else {
       const avatar = gravatar.url(req.body.email, {
         s: '200', // size
-        r: 'pg', // rating
+        r: 'g', // rating
         d: 'mm' // defaults to std user w/o image icon
       });
       const newUser = new User({
@@ -110,12 +110,16 @@ router.post('/login', (req, res) => {
 // @route   GET api/users/current
 // @desc    Return current uzer
 // @access  Private
-router.get('/current', passport.authenticate('jwt', { session: false }), (req, res) => {
-  res.json({
-    id: req.user.id,
-    name: req.user.name,
-    email: req.user.email
-  });
-});
+router.get(
+  '/current',
+  passport.authenticate('jwt', { session: false }),
+  (req, res) => {
+    res.json({
+      id: req.user.id,
+      name: req.user.name,
+      email: req.user.email
+    });
+  }
+);
 
 module.exports = router;

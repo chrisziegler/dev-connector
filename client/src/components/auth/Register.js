@@ -14,10 +14,16 @@ class Register extends Component {
     errors: {}
   };
 
+  // If user is logged in do not load register form in Landing/Dashboard spot
+  componentDidMount() {
+    if (this.props.auth.isAuthenticated) {
+      this.props.history.push('/dashboard');
+    }
+  }
+
   // While we could now (post errorReducer) get our errors directly from props
   // via mapSateToProps, we want to keep it in the state, but update if changed
   // this way everything in render method will still work
-
   componentWillReceiveProps(nextProps) {
     if (nextProps.errors) {
       this.setState({ errors: nextProps.errors });
