@@ -6,7 +6,7 @@ import TextAreaFieldGroup from '../common/TextAreaFieldGroup';
 import SelectListGroup from '../common/SelectListGroup';
 import InputGroup from '../common/InputGroup';
 
-export class CreateProfile extends Component {
+class CreateProfile extends Component {
   state = {
     displaySocialInputs: false,
     handle: '',
@@ -25,13 +25,37 @@ export class CreateProfile extends Component {
     errors: {}
   };
 
+  onSubmit = e => {
+    e.preventDefault();
+    // TODO: AC here
+    console.log('submit');
+  };
+
+  onChange = e => {
+    this.setState({ [e.target.name]: e.target.value });
+  };
+
   render() {
+    const { errors } = this.state;
+    // Select options for status
+    const options = [
+      { label: '* Select Professional Status', value: 0 },
+      { label: 'Developer', value: 'Developer' },
+      { label: 'Jr. Developer', value: 'Jr. Developer' },
+      { label: 'Senior Developer', value: 'Senior Developer' },
+      { label: 'Manager', value: 'Manager' },
+      { label: 'Student or Learning', value: 'Student or Learning' },
+      { label: 'Instructor', value: 'Instructor' },
+      { label: 'Intern', value: 'Intern' },
+      { label: 'Other', value: 'Other' }
+    ];
+
     return (
       <div className="create-profile">
         <div className="container">
           <div className="row">
             <div className="col-md-8 m-auto">
-              <h1 className="display-4 text-center">
+              <h1 className="display-6 text-center">
                 Create Your Profile
               </h1>
               <p className="lead text-center">
@@ -41,6 +65,74 @@ export class CreateProfile extends Component {
               <small className="d-block pb-3">
                 * = required field
               </small>
+              <form onSubmit={this.onSubmit}>
+                <TextFieldGroup
+                  placeholder="* Profile Handle"
+                  name="handle"
+                  value={this.state.handle}
+                  onChange={this.onChange}
+                  error={errors.handle}
+                  info="A unique handle for your profile URL. Your full name, company name, nickname, etc."
+                />
+                <SelectListGroup
+                  placeholder="Status"
+                  name="status"
+                  value={this.state.status}
+                  onChange={this.onChange}
+                  options={options}
+                  error={errors.status}
+                  info="Give us an idea of where you are at in your career"
+                />
+                <TextFieldGroup
+                  placeholder="Company"
+                  name="company"
+                  value={this.state.company}
+                  onChange={this.onChange}
+                  error={errors.company}
+                  info="Could be your own company, or one you work for."
+                />
+                <TextFieldGroup
+                  placeholder="Website"
+                  name="website"
+                  value={this.state.website}
+                  onChange={this.onChange}
+                  error={errors.website}
+                  info="Could be your own website, or companies"
+                />
+                <TextFieldGroup
+                  placeholder="Location"
+                  name="location"
+                  value={this.state.location}
+                  onChange={this.onChange}
+                  error={errors.location}
+                  info="City, or city & state suggested (eg. Seattle, WA)"
+                />
+                <TextFieldGroup
+                  placeholder="* Skills"
+                  name="skills"
+                  value={this.state.skills}
+                  onChange={this.onChange}
+                  error={errors.skills}
+                  info="Please use comma separated values (eg.
+                  HTML,CSS,JavaScript,React,Node,PHP)"
+                />
+                <TextFieldGroup
+                  placeholder="Github Username"
+                  name="githubusername"
+                  value={this.state.githubusername}
+                  onChange={this.onChange}
+                  error={errors.githubusername}
+                  info="If you want your latest repos and a Github link, include your username"
+                />
+                <TextAreaFieldGroup
+                  placeholder="* Short Bio"
+                  name="bio"
+                  value={this.state.bio}
+                  onChange={this.onChange}
+                  error={errors.bio}
+                  info="Tell us a little about yourself"
+                />
+              </form>
             </div>
           </div>
         </div>
@@ -59,4 +151,4 @@ const mapStateToProps = state => ({
   errors: state.errors
 });
 
-export default connect(null, {})(CreateProfile);
+export default connect(mapStateToProps)(CreateProfile);
