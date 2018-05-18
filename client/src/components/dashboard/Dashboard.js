@@ -20,7 +20,8 @@ class Dashboard extends Component {
     } else {
       // Check if logged in user has profile data
       if (Object.keys(profile).length > 0) {
-        dashboardContent = <h4>TODO: Display Profile Components</h4>;
+        // dashboardContent = <h4>TODO: Display Profile Components</h4>;
+        console.log(JSON.stringify(this.props.profile, undefined, 4));
       } else {
         // User is logged in but has no profile
         dashboardContent = (
