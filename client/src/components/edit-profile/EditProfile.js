@@ -31,10 +31,12 @@ class EditProfile extends Component {
   };
 
   // main difference between this and CreateProfile component
+  // profile state is now in props
   componentDidMount() {
     this.props.getCurrentProfile();
   }
-
+  // mapStateToProps triggers this lifecycle method with those new props
+  // spread and write over prevState to preserve empty fields
   componentWillReceiveProps(nextProps) {
     if (nextProps.errors) {
       this.setState({ errors: nextProps.errors });

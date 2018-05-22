@@ -160,7 +160,7 @@ router.post(
 );
 
 // @route   POST api/profile/experience
-// @desc    Add experience ro profile
+// @desc    Add experience to profile
 // @access  Private
 router.post(
   '/experience',
@@ -190,7 +190,7 @@ router.post(
 );
 
 // @route   POST api/profile/education
-// @desc    Add education ro profile
+// @desc    Add education to profile
 // @access  Private
 router.post(
   '/education',
