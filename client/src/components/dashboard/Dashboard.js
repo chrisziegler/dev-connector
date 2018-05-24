@@ -8,6 +8,8 @@ import {
 import PropTypes from 'prop-types';
 import Spinner from '../common/Spinner';
 import ProfileActions from './ProfileActions';
+import Experience from './Experience';
+import Education from './Education';
 
 class Dashboard extends Component {
   componentDidMount() {
@@ -38,7 +40,9 @@ class Dashboard extends Component {
               </Link>
             </p>
             <ProfileActions />
-            {/* TODO: Experience and Education */}
+            <Experience experience={profile.experience} />
+            <Education education={profile.education} />
+
             <div style={{ marginBottom: '60px' }} />
             <button
               onClick={this.onDeleteClick}
@@ -81,7 +85,7 @@ class Dashboard extends Component {
 
 Dashboard.propTypes = {
   getCurrentProfile: PropTypes.func.isRequired,
-  deleteAccout: PropTypes.func.isRequired,
+  deleteAccount: PropTypes.func.isRequired,
   auth: PropTypes.object.isRequired,
   profile: PropTypes.object.isRequired
 };

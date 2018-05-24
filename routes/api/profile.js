@@ -221,6 +221,7 @@ router.post(
 // @route   DELETE api/profile/experience/:experience_id
 // @desc    Delete Experience from profile
 // @access  Private
+// TESTING TO SEE IF THIS ROUTE IS THE CULPRIT
 router.delete(
   '/experience/:experience_id',
   passport.authenticate('jwt', { session: false }),
@@ -230,12 +231,14 @@ router.delete(
         profile.experience.remove({ _id: req.params.experience_id });
         profile
           .save()
-          .then(profile => res.json(profile.experience))
+          .then(profile => res.json(profile))
           .catch(err => res.json(err));
       })
       .catch(err => res.json(err));
   }
 );
+
+// );
 
 // @route   DELETE api/profile/education/:education_id
 // @desc    Delete Education from profile
@@ -249,7 +252,7 @@ router.delete(
         profile.education.remove({ _id: req.params.education_id });
         profile
           .save()
-          .then(profile => res.json(profile.education))
+          .then(profile => res.json(profile))
           .catch(err => res.json(err));
       })
       .catch(err => res.json(err));
