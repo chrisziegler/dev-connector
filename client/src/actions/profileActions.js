@@ -22,11 +22,32 @@ export const getCurrentProfile = () => dispatch => {
         payload: res.data
       })
     )
-    // If there isn't one it's not an error, just return an empty object as a profile
+    // If there isn't one it's not an error, a user can have an empty profile
+    // just return an empty object as a profile
     .catch(err =>
       dispatch({
         type: GET_PROFILE,
         payload: {}
+      })
+    );
+};
+
+// Get profile by handle
+export const getProfileByHandle = handle => dispatch => {
+  dispatch(setProfileLoading());
+  axios
+    .get(`/api/profile/handle/${handle}`)
+    .then(res =>
+      dispatch({
+        type: GET_PROFILE,
+        payload: res.data
+      })
+    )
+    .catch(err =>
+      dispatch({
+        type: GET_PROFILE,
+        // want to check to see if its null where we call this action
+        payload: null
       })
     );
 };
