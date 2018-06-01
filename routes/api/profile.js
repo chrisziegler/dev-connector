@@ -3,6 +3,7 @@ const router = express.Router();
 const mongoose = require('mongoose');
 // Require-in passport for protected routes
 const passport = require('passport');
+const prependHttp = require('prepend-http');
 // Load validation
 const validateProfileInput = require('../../validation/profile');
 const validateExperienceInput = require('../../validation/experience');
@@ -118,18 +119,30 @@ router.post(
       profileFields.skills = req.body.skills.split(',');
     }
 
-    // Social
     profileFields.social = {};
     if (req.body.youtube)
-      profileFields.social.youtube = req.body.youtube;
+      profileFields.social.youtube = prependHttp(req.body.youtube, {
+        https: true
+      });
     if (req.body.twitter)
-      profileFields.social.twitter = req.body.twitter;
+      profileFields.social.twitter = prependHttp(req.body.twitter, {
+        https: true
+      });
     if (req.body.facebook)
-      profileFields.social.facebook = req.body.facebook;
+      profileFields.social.facebook = prependHttp(req.body.facebook, {
+        https: true
+      });
     if (req.body.linkedin)
-      profileFields.social.linkedin = req.body.linkedin;
+      profileFields.social.linkedin = prependHttp(req.body.linkedin, {
+        https: true
+      });
     if (req.body.instagram)
-      profileFields.social.instagram = req.body.instagram;
+      profileFields.social.instagram = prependHttp(
+        req.body.instagram,
+        {
+          https: true
+        }
+      );
 
     Profile.findOne({ user: req.user.id }).then(profile => {
       if (profile) {
