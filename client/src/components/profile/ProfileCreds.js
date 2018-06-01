@@ -32,9 +32,9 @@ export class ProfileCreds extends Component {
                 <strong>Position: </strong> Systems Admin
               </p>
               <p>
-                <p>
+                <span>
                   <strong>Location: </strong> Miami, FL
-                </p>
+                </span>
                 <strong>Description: </strong> Lorem ipsum dolor sit
                 amet consectetur adipisicing elit. Unde doloribus
                 dicta enim excepturi laborum voluptatem nam provident
@@ -57,12 +57,12 @@ export class ProfileCreds extends Component {
                 <strong>Field Of Study: </strong>Computer Science
               </p>
               <p>
-                <p>
+                <span>
                   <strong>Description:</strong> Lorem ipsum dolor sit
                   amet consectetur adipisicing elit. Unde doloribus
                   dicta enim excepturi laborum voluptatem nam
                   provident quisquam facere. Quae?
-                </p>
+                </span>
               </p>
             </li>
           </ul>
