@@ -21,6 +21,7 @@ export const registerUser = (userData, history) => dispatch => {
 // Login - Get User token
 export const loginUser = userData => dispatch => {
   axios
+    // post to our login endpoint sending the userData from login form
     .post('/api/users/login', userData)
     // here we need to call then for our promise chain
     // take our response and open up a code block for our logic

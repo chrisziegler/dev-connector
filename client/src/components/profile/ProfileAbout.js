@@ -8,6 +8,8 @@ class ProfileAbout extends Component {
 
   render() {
     const { profile } = this.props;
+    const firstName = profile.user.name.trim().split(' ')[0];
+
     return (
       <div className="row">
         <div className="col-md-12">
@@ -16,7 +18,11 @@ class ProfileAbout extends Component {
               {profile.user.name}
             </h3>
 
-            {profile.bio && <p className="lead">{profile.bio}</p>}
+            {profile.bio ? (
+              <p className="lead">{profile.bio}</p>
+            ) : (
+              <p>{firstName} does not have a bio.</p>
+            )}
 
             <hr />
             <h3 className="text-center text-info">Skill Set</h3>
