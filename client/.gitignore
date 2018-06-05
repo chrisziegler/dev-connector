@@ -3,6 +3,9 @@
 # dependencies
 /node_modules
 
+# git hub user keys
+/src/keys
+
 # testing
 /coverage
 
