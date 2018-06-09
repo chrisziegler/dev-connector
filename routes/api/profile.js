@@ -60,6 +60,7 @@ router.get('/handle/:handle', (req, res) => {
   Profile.findOne({ handle: req.params.handle })
     .populate('user', ['name', 'avatar'])
     .then(profile => {
+      // If statement here may cause error response to be doubled w/the catch too
       if (!profile) {
         errors.noprofile = 'No profile for this user';
         return res.status(404).json(errors);

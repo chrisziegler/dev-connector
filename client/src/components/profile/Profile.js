@@ -27,7 +27,11 @@ class Profile extends Component {
       this.props.profile.loading
     ) {
       this.props.history.push('/not-found');
-    } else if (
+    }
+    // note this corrects logout error from Profile but due to speed of loading
+    // being resolved to true, causes redirect to /dashboard (and then to login
+    // if user not logged-in) instead of being taken to a not-found route
+    else if (
       nextProps.profile.profile === null &&
       !this.props.profile.loading
     ) {
@@ -80,6 +84,7 @@ const mapStateToProps = state => ({
   profile: state.profile
 });
 
-export default connect(mapStateToProps, { getProfileByHandle })(
-  Profile
-);
+export default connect(
+  mapStateToProps,
+  { getProfileByHandle }
+)(Profile);
