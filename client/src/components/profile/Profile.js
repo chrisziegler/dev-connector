@@ -28,9 +28,8 @@ class Profile extends Component {
     ) {
       this.props.history.push('/not-found');
     }
-    // note this corrects logout error from Profile but due to speed of loading
-    // being resolved to true, causes redirect to /dashboard (and then to login
-    // if user not logged-in) instead of being taken to a not-found route
+    // this is working since refactored router with all routes inside
+    // same Switch component, and removed path from /not-found
     else if (
       nextProps.profile.profile === null &&
       !this.props.profile.loading
