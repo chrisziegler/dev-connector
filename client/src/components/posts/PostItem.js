@@ -10,9 +10,14 @@ export class PostItem extends Component {
     auth: PropTypes.object.isRequired
   };
 
+  onDeleteClick = postId => {
+    console.log(postId);
+  };
+
   render() {
     const {
-      post: { text, name, avatar },
+      post,
+      post: { user, text, name, avatar, likes },
       auth
     } = this.props;
     return (
@@ -22,34 +27,39 @@ export class PostItem extends Component {
             <a href="profile.html">
               <img
                 className="rounded-circle d-none d-md-block"
-                src="https://www.gravatar.com/avatar/205e460b479e2e5b48aec07710c08d50?s=200"
-                alt=""
+                src={avatar}
+                alt="user avatar"
               />
             </a>
             <br />
-            <p className="text-center">John Doe</p>
+            <p className="text-center">{name}</p>
           </div>
           <div className="col-md-10">
-            <p className="lead">
-              Lorem ipsum dolor sit amet consectetur adipisicing elit.
-              Sint possimus corporis sunt necessitatibus! Minus
-              nesciunt soluta suscipit nobis. Amet accusamus
-              distinctio cupiditate blanditiis dolor? Illo perferendis
-              eveniet cum cupiditate aliquam?
-            </p>
+            <p className="lead">{text}</p>
             <button type="button" className="btn btn-light mr-1">
               <i className="text-info fas fa-thumbs-up" />
-              <span className="badge badge-light">4</span>
+              <span className="badge badge-light">
+                {likes.length}
+              </span>
             </button>
             <button type="button" className="btn btn-light mr-1">
               <i className="text-secondary fas fa-thumbs-down" />
             </button>
-            <a href="post.html" className="btn btn-info mr-1">
+            <Link
+              to={`/post/${post._id}`}
+              className="btn btn-info mr-1"
+            >
               Comments
-            </a>
-            {/* <button type="button" className="btn btn-danger mr-1">
-                    <i className="fas fa-times" />
-                  </button> */}
+            </Link>
+            {user === auth.user.id ? (
+              <button
+                onClick={this.onDeleteClick.bind(post._id)}
+                type="button"
+                className="btn btn-danger mr-1"
+              >
+                <i className="fas fa-times" />
+              </button>
+            ) : null}
           </div>
         </div>
       </div>
