@@ -3,15 +3,17 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import classnames from 'classnames';
 import { Link } from 'react-router-dom';
+import { deletePost } from '../../actions/postActions';
 
 export class PostItem extends Component {
   static propTypes = {
     post: PropTypes.object.isRequired,
-    auth: PropTypes.object.isRequired
+    auth: PropTypes.object.isRequired,
+    deletePost: PropTypes.func.isRequired
   };
 
-  onDeleteClick = postId => {
-    console.log(postId);
+  onDeleteClick = id => {
+    this.props.deletePost(id);
   };
 
   render() {
@@ -53,7 +55,7 @@ export class PostItem extends Component {
             </Link>
             {user === auth.user.id ? (
               <button
-                onClick={this.onDeleteClick.bind(post._id)}
+                onClick={() => this.onDeleteClick(post._id)}
                 type="button"
                 className="btn btn-danger mr-1"
               >
@@ -72,4 +74,7 @@ const mapStateToProps = state => ({
   auth: state.auth
 });
 
-export default connect(mapStateToProps)(PostItem);
+export default connect(
+  mapStateToProps,
+  { deletePost }
+)(PostItem);
