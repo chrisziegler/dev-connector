@@ -7,7 +7,8 @@ import {
   GET_POSTS,
   GET_ERRORS,
   POST_LOADING,
-  DELETE_POST
+  DELETE_POST,
+  LIKE_POST
 } from './types';
 
 // Add Post
@@ -67,6 +68,44 @@ export const deletePost = id => dispatch => {
         payload: err.response.data
       })
     );
+};
+
+// Add like
+export const addLike = id => dispatch => {
+  axios
+    .post(`/api/posts/like/${id}`)
+    .then((
+      { data } // destructure data off response
+    ) =>
+      dispatch({
+        type: LIKE_POST,
+        payload: data //pass in updated post
+      })
+    )
+    .catch(({ response }) =>
+      dispatch({
+        type: GET_ERRORS,
+        payload: response.data
+      })
+    );
+};
+
+//Remove Like
+export const removeLike = id => dispatch => {
+  axios
+    .post(`/api/posts/unlike/${id}`)
+    .then(({ data }) => {
+      dispatch({
+        type: LIKE_POST,
+        payload: data //pass in updated post
+      });
+    })
+    .catch(({ response }) => {
+      dispatch({
+        type: GET_ERRORS,
+        payload: response.data
+      });
+    });
 };
 
 // Set loading state
