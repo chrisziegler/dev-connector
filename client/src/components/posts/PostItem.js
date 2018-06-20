@@ -29,6 +29,16 @@ export class PostItem extends Component {
     this.props.removeLike(id);
   };
 
+  // give green thumb to active users likes
+  findUserLike = likes => {
+    const { auth } = this.props;
+    if (likes.filter(like => like.user === auth.user.id).length > 0) {
+      return true;
+    } else {
+      return false;
+    }
+  };
+
   render() {
     const {
       post,
@@ -56,7 +66,13 @@ export class PostItem extends Component {
               type="button"
               className="btn btn-light mr-1"
             >
-              <i className="text-info fas fa-thumbs-up" />
+              <i
+                className={`${
+                  this.findUserLike(likes)
+                    ? 'text-success'
+                    : 'text-secondary'
+                } fas fa-thumbs-up`}
+              />
               <span className="badge badge-light">
                 {likes.length}
               </span>
