@@ -5,6 +5,7 @@ import axios from 'axios';
 import {
   ADD_POST,
   GET_POSTS,
+  GET_POST,
   GET_ERRORS,
   POST_LOADING,
   DELETE_POST,
@@ -66,6 +67,27 @@ export const deletePost = id => dispatch => {
       dispatch({
         type: GET_ERRORS,
         payload: err.response.data
+      })
+    );
+};
+
+// Get Post
+export const getPost = id => dispatch => {
+  dispatch(setPostLoading());
+  axios
+    .get(`/api/posts/${id}`)
+    .then(res =>
+      dispatch({
+        type: GET_POST,
+        payload: res.data
+      })
+    )
+    // if there's an error we don't want to GET_ERRORS, since we don't have a form or
+    // anything needing to display them, just use the same dispatch with a null payload
+    .catch(err =>
+      dispatch({
+        type: GET_POST,
+        payload: null
       })
     );
 };

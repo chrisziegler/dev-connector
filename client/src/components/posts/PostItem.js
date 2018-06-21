@@ -29,9 +29,11 @@ export class PostItem extends Component {
     this.props.removeLike(id);
   };
 
-  // give green thumb to active users likes
+  // checks if user is in likes array so we can give their thumb special class
   findUserLike = likes => {
     const { auth } = this.props;
+    // user id is stored in like array each time they like a post
+    // filter returns an array which will be truthy even if empty, check it is populated
     if (likes.filter(like => like.user === auth.user.id).length > 0) {
       return true;
     } else {
@@ -41,8 +43,7 @@ export class PostItem extends Component {
 
   render() {
     const {
-      post,
-      post: { user, text, name, avatar, likes },
+      post: { _id, user, text, name, avatar, likes },
       auth
     } = this.props;
     return (
@@ -62,7 +63,7 @@ export class PostItem extends Component {
           <div className="col-md-10">
             <p className="lead">{text}</p>
             <button
-              onClick={() => this.onLikeClick(post._id)}
+              onClick={() => this.onLikeClick(_id)}
               type="button"
               className="btn btn-light mr-1"
             >
@@ -78,21 +79,18 @@ export class PostItem extends Component {
               </span>
             </button>
             <button
-              onClick={() => this.onUnlikeClick(post._id)}
+              onClick={() => this.onUnlikeClick(_id)}
               type="button"
               className="btn btn-light mr-1"
             >
               <i className="text-secondary fas fa-thumbs-down" />
             </button>
-            <Link
-              to={`/post/${post._id}`}
-              className="btn btn-info mr-1"
-            >
+            <Link to={`/post/${_id}`} className="btn btn-info mr-1">
               Comments
             </Link>
             {user === auth.user.id ? (
               <button
-                onClick={() => this.onDeleteClick(post._id)}
+                onClick={() => this.onDeleteClick(_id)}
                 type="button"
                 className="btn btn-danger mr-1"
               >
