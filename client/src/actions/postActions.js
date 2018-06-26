@@ -9,11 +9,13 @@ import {
   GET_ERRORS,
   POST_LOADING,
   DELETE_POST,
-  LIKE_POST
+  LIKE_POST,
+  CLEAR_ERRORS
 } from './types';
 
 // Add Post
 export const addPost = postData => dispatch => {
+  dispatch(clearErrors());
   axios
     .post('/api/posts', postData)
     .then(res =>
@@ -132,6 +134,7 @@ export const removeLike = id => dispatch => {
 
 // Add Comment
 export const addComment = (postId, commentData) => dispatch => {
+  dispatch(clearErrors());
   axios
     .post(`/api/posts/comment/${postId}`, commentData)
     .then(res =>
@@ -166,6 +169,12 @@ export const deleteComment = (postId, commentId) => dispatch => {
         payload: err.response.data
       })
     );
+};
+// Clear errors
+export const clearErrors = () => {
+  return {
+    type: CLEAR_ERRORS
+  };
 };
 
 // Set loading state
