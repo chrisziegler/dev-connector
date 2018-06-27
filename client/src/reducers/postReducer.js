@@ -9,7 +9,6 @@ import {
 
 const initialState = {
   posts: [],
-  // post does not seem to be used, look into removing
   post: {},
   loading: false
 };
